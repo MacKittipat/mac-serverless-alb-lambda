@@ -126,8 +126,11 @@ resources:
       Type: AWS::ElasticLoadBalancingV2::Listener
       Properties:
         DefaultActions:
-          - TargetGroupArn: !Ref MacTG
-            Type: forward
+          - Type: fixed-response
+            FixedResponseConfig:
+              ContentType: "text/plain"
+              MessageBody: "Not found"
+              StatusCode: "404"
         LoadBalancerArn: !Ref MacALB
         Port: 80
         Protocol: "HTTP"
